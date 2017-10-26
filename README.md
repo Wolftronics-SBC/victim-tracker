@@ -1,4 +1,4 @@
-# emily-tracker
+# victim-tracker
 Track a victim in the video feed to get its center and size in the image frame.
 
 ## Graphical User Interface
@@ -12,6 +12,18 @@ Drag with left mouse button.
 Show backprojection mode by pressing b key. Switch back by pressing b again.
 
 Press escape key to exit.
+
+## Input
+
+Create input folder in the root directory. Put there any videos you want to use.
+
+## Output
+
+Create output folder in the root directory. The output video and logs will be put there.
+
+## Settings
+
+The Settings.hpp file can be used to select video source.
 
 ## OpenCV Installation on macOS
 
