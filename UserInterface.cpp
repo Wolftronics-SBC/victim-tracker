@@ -84,7 +84,7 @@ void UserInterface::create_main_window() {
 }
 
 /**
- * Select object of interest in image.
+ * Mouse handler.
  * 
  */
 void UserInterface::onMouse(int event, int x, int y, int flags, void*) {
@@ -109,8 +109,7 @@ void UserInterface::onMouse(int event, int x, int y, int flags, void*) {
             // Left click context menu is disabled
             // Scrool is reserved for zoom
 
-            // Right drag to select EMILY
-        case EVENT_RBUTTONDOWN:
+        case EVENT_RBUTTONDOWN: // Right drag to select victim
 
             // Save current point as click origin
             UserInterface::origin = Point(x, y);
@@ -178,6 +177,13 @@ void UserInterface::draw_position(int x, int y, double radius, Mat &frame) {
     putText(frame, "[" + int_to_string(x) + "," + int_to_string(y) + "]", Point(x, y + radius + 20), 1, 1, UserInterface::settings->LOCATION_COLOR, 1, 8);
 }
 
+/**
+ * Prints current status to the GUI.
+ * 
+ * @param frame
+ * @param status
+ * @param time_to_target
+ */
 void UserInterface::print_status(Mat& frame, int status) {
 
     String stringStatus;
@@ -213,10 +219,20 @@ string UserInterface::int_to_string(int number) {
     return stringStream.str();
 }
 
+/**
+ * Show main window.
+ * 
+ * @param mat
+ */
 void UserInterface::show_main(Mat& mat) {
     imshow(UserInterface::settings->MAIN_WINDOW, mat);
 }
 
+/**
+ * Show histogram window.
+ * 
+ * @param mat
+ */
 void UserInterface::show_histogram(Mat& mat) {
     imshow(UserInterface::settings->HISTOGRAM_WINDOW, mat);
 }

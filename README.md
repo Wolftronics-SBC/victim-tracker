@@ -1,47 +1,25 @@
-# victim-tracker
-Track a victim in the video feed to get its center and size in the image frame.
+# Tracking of Drowning Victims Using Unmanned Surface Vehicle
+This project aims at detecting and tracking of drowning victims using an unmanned surface vehicle (USV). This program can track a victim wearing red or yellow live jacket using USV's on-board visual camera. The output of the program is the victim's position and relative size.
 
-## Graphical User Interface
+## Installation on macOS
 
-Select victim by holding CTRL key and making selectiong using left mouse button.
-
-Zoom with mouse wheel.
-
-Drag with left mouse button.
-
-Show backprojection mode by pressing b key. Switch back by pressing b again.
-
-Press escape key to exit.
-
-## Input
-
-Create input folder in the root directory. Put there any videos you want to use.
-
-## Output
-
-Create output folder in the root directory. The output video and logs will be put there.
-
-## Settings
-
-The Settings.hpp file can be used to select video source.
-
-## OpenCV Installation on macOS
-
-1. Install Homebrew
+1. Install Homebrew:
 
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-2. Install OpenCV with ffmpeg support
+2. Install OpenCV with FFmpeg support:
 
     brew tap homebrew/science
 
     brew install opencv3 --with-contrib --with-ffmpeg --with-tbb --with-qt5
 
-3. Link OpenCV
+3. Link OpenCV:
 
     brew link --force --override opencv3
 
-4. Install CMake from cmake.org
+4. Install CMake:
+
+    https://cmake.org
 
 5. Delete the following files from the root directory if they exist (those are system specific files that you will have to generate again on your system):
 
@@ -51,12 +29,44 @@ The Settings.hpp file can be used to select video source.
 
     CMakeFiles
 
-    EMILYVictimTracker
+    EMILYTracker
 
     Makefile
 
 6. In terminal, change directory into the root directory of the project and run the following command to generate makefile:
 
-    cmake CMakeLists.txt
+    cmake .
 
-7. Compile the project using C++ compiler.
+3. Compile the project:
+
+    make
+
+## Settings
+
+The Settings.hpp file can be used to select video source.
+
+## Input
+
+Create input folder in the root directory. Put there any videos you want to use.
+
+## Output
+
+Create output folder in the root directory. The output video and logs will be put there.
+
+## Manual
+
+The graphical user interface has the following functionality:
+
+* If automatic histogram construction is enabled: Select the victim by holding CTRL key and making the selection using left mouse button.
+
+* Zoom with mouse wheel or touchpad scroll.
+
+* Drag with left mouse button.
+
+* Show histogram backprojection view by pressing b key. Switch back by pressing b again.
+
+* Pause the video feed by pressing p key.
+
+* Press escape key to exit.
+
+* Use the sliders to adjust program parameters.

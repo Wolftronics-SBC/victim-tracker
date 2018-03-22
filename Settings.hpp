@@ -8,6 +8,7 @@ using namespace cv;
 
 class Settings {
 public:
+    
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
     // Input
@@ -86,7 +87,6 @@ public:
 
     // Hue 2 range for thresholding
     int hue_2_min = 160;
-    //int hue_2_min = 180; // Works well for lab
     int hue_2_max = 180;
 
     // Saturation range for thresholding

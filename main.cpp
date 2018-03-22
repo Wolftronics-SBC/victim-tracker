@@ -5,7 +5,7 @@
  * @version 1.0
  *  
  * This is an example on how to use VictimTracker class.
- * VictimTracker class is used to track victim wearing red life jacket in video feed.
+ * VictimTracker class is used to track a victim wearing a red or yellow life jacket in the input video feed.
  *
  */
 

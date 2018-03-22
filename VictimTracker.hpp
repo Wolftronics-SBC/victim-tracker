@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   VictimTracker.hpp
- * Author: Jan
+ * Author: Jan Dufek
  *
  * Created on October 25, 2017, 9:32 PM
  */
@@ -46,12 +40,17 @@
 using namespace cv;
 using namespace std;
 
+////////////////////////////////////////////////////////////////////////////////
+// Externs
+////////////////////////////////////////////////////////////////////////////////
+
 extern bool select_object;
 extern int object_selected;
 extern Rect selection;
 
 class VictimTracker {
 public:
+    
     VictimTracker();
     VictimTracker(const VictimTracker& orig);
     virtual ~VictimTracker();
@@ -96,10 +95,10 @@ private:
     Mat original_frame;
 
     // EMILY location
-    Point emily_location;
+    Point victim_location;
 
     // EMILY size
-    Size2f emily_size;
+    Size2f victim_size;
 
     // EMILY location history
     Point * emily_location_history = new Point[settings->EMILY_LOCATION_HISTORY_SIZE];
@@ -152,6 +151,10 @@ private:
     // Paused mode
     bool paused = false;
 
+    ////////////////////////////////////////////////////////////////////////////////
+    // Methods
+    ////////////////////////////////////////////////////////////////////////////////
+    
     double get_input_video_fps();
 
     void get_input_video_size();

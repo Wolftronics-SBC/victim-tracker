@@ -1,0 +1,6 @@
+input/*
+output/*
+cmake_install.cmake
+CMakeCache.txt
+CMakeFiles
+EMILYVictimTracker

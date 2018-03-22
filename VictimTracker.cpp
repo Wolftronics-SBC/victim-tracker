@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   VictimTracker.cpp
- * Author: jan
+ * Author: Jan Dufek
  * 
  * Created on October 25, 2017, 9:32 PM
  */
@@ -63,6 +57,7 @@ VictimTracker::VictimTracker() {
     // Histogram
     ////////////////////////////////////////////////////////////////////////////
 
+    // Histogram ranges
     histogram_ranges[0] = 0;
     histogram_ranges[1] = 180;
 
@@ -97,6 +92,11 @@ VictimTracker::~VictimTracker() {
 
 }
 
+/**
+ * Get frame per seconds of the input video feed.
+ * 
+ * @return Frame per seconds
+ */
 double VictimTracker::get_input_video_fps() {
     double input_video_fps = video_capture.get(CV_CAP_PROP_FPS);
 
@@ -139,6 +139,9 @@ double VictimTracker::get_input_video_fps() {
     return input_video_fps;
 }
 
+/**
+ * Get the resolution of the input video feed.
+ */
 void VictimTracker::get_input_video_size() {
 
     Size input_video_size(video_capture.get(CV_CAP_PROP_FRAME_WIDTH), video_capture.get(CV_CAP_PROP_FRAME_HEIGHT));
@@ -177,6 +180,11 @@ void VictimTracker::get_input_video_size() {
     }
 }
 
+/**
+ * Equalize histogram of the given frame.
+ * 
+ * @param HSV_frame
+ */
 void VictimTracker::equalize(Mat& HSV_frame) {
     vector<Mat> HSV_planes;
     split(HSV_frame, HSV_planes);
@@ -184,6 +192,17 @@ void VictimTracker::equalize(Mat& HSV_frame) {
     merge(HSV_planes, HSV_frame);
 }
 
+/**
+ * Create histogram for the area of interest.
+ * 
+ * @param object_of_interest
+ * @param histogram_size
+ * @param pointer_histogram_ranges
+ * @param hue
+ * @param saturation_value_threshold
+ * @param histogram
+ * @param histogram_image
+ */
 void VictimTracker::create_histogram(Rect& object_of_interest, int& histogram_size, const float*& pointer_histogram_ranges, Mat& hue, Mat& saturation_value_threshold, Mat& histogram, Mat& histogram_image) {
 
     // Region of interest
@@ -220,6 +239,12 @@ void VictimTracker::create_histogram(Rect& object_of_interest, int& histogram_si
     }
 }
 
+/**
+ * Create one log entry with current system status.
+ * 
+ * @param logger
+ * @param current_commands
+ */
 void VictimTracker::create_log_entry(Logger* logger) {
 
     // Get current time
@@ -235,15 +260,15 @@ void VictimTracker::create_log_entry(Logger* logger) {
     logger->log_general(" ");
 
     // Log EMILY location
-    logger->log_general(emily_location.x);
+    logger->log_general(victim_location.x);
     logger->log_general(" ");
-    logger->log_general(emily_location.y);
+    logger->log_general(victim_location.y);
     logger->log_general(" ");
 
     // Log EMILY size
-    logger->log_general(emily_size.height);
+    logger->log_general(victim_size.height);
     logger->log_general(" ");
-    logger->log_general(emily_size.width);
+    logger->log_general(victim_size.width);
     logger->log_general(" ");
 
     // Log status
@@ -254,14 +279,22 @@ void VictimTracker::create_log_entry(Logger* logger) {
 
 }
 
+/**
+ * Update victim location history.
+ * 
+ * @param target_set
+ */
 void VictimTracker::update_history() {
     // Save current location to history
-    emily_location_history[emily_location_history_pointer] = emily_location;
+    emily_location_history[emily_location_history_pointer] = victim_location;
 
     // Update circular array pointer
     emily_location_history_pointer = (emily_location_history_pointer + 1) % settings->EMILY_LOCATION_HISTORY_SIZE;
 }
 
+/**
+ * Show current object of interest selection in the GUI.
+ */
 void VictimTracker::show_selection() {
     if (select_object && selection.width > 0 && selection.height > 0) {
         Mat roi(original_frame, selection);
@@ -269,6 +302,11 @@ void VictimTracker::show_selection() {
     }
 }
 
+/**
+ * Call in each iteration to track the victim.
+ * 
+ * @return 
+ */
 int VictimTracker::logic() {
 
     // If not paused       
@@ -307,10 +345,10 @@ int VictimTracker::logic() {
 
     }
 
-    // Blur
+    // Apply Gaussian blur filter
     GaussianBlur(original_frame, blured_frame, Size(settings->blur_kernel_size, settings->blur_kernel_size), 0, 0);
 
-    // Convert to HSV
+    // Convert to HSV color space
     Mat HSV_frame;
     cvtColor(blured_frame, HSV_frame, COLOR_BGR2HSV);
 
@@ -333,6 +371,7 @@ int VictimTracker::logic() {
             hue.create(HSV_frame.size(), HSV_frame.depth());
             mixChannels(&HSV_frame, 1, &hue, 1, chanels, 1);
 
+            // Uncomment this only if histogram should be created automatically
             //                // Object does not have histogram yet, so create it
             //                if (object_selected < 0) {
             //
@@ -373,10 +412,10 @@ int VictimTracker::logic() {
 #endif
 
                 // Save EMILY location
-                emily_location = Point(tracking_box.center.x, tracking_box.center.y);
+                victim_location = Point(tracking_box.center.x, tracking_box.center.y);
 
                 // Save EMILY size
-                emily_size = tracking_box.size;
+                victim_size = tracking_box.size;
 
             }
 
@@ -394,8 +433,11 @@ int VictimTracker::logic() {
     //user_interface->show_histogram(histogram_image);
 
     char character = (char) waitKey(10);
+    
     if (character == 27)
+        
         return -1;
+    
     switch (character) {
         case 'b':
 
@@ -464,14 +506,24 @@ int VictimTracker::logic() {
 
 }
 
+/**
+ * Get centroid of the victim.
+ * 
+ * @return 
+ */
 Point VictimTracker::getCenter() {
 
-    return emily_location;
+    return victim_location;
 
 }
 
+/**
+ * Get size of the victim.
+ * 
+ * @return 
+ */
 Size2f VictimTracker::getSize() {
 
-    return emily_size;
+    return victim_size;
 
 }

@@ -22,6 +22,11 @@ OutputVideo::OutputVideo(const OutputVideo& orig) {
 OutputVideo::~OutputVideo() {
 }
 
+/**
+ * Initialize video writer.
+ * 
+ * @return 
+ */
 VideoWriter OutputVideo::get_video_writer() {
     
     // Codec used to output the video

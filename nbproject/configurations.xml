@@ -19,7 +19,6 @@
       <in>Settings.cpp</in>
       <in>UserInterface.cpp</in>
       <in>VictimTracker.cpp</in>
-      <in>VictimTracker.hpp</in>
       <in>main.cpp</in>
     </df>
     <logicalFolder name="ExternalFiles"
@@ -43,6 +42,9 @@
         <dependencyChecking>false</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
+      <flagsDictionary>
+        <element flagsID="0" commonFlags="-std=gnu++11"/>
+      </flagsDictionary>
       <codeAssistance>
       </codeAssistance>
       <makefileType>
@@ -55,35 +57,70 @@
         <preBuild>
           <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
           <preBuildCommand>${CMAKE} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=${IDE_CC} -DCMAKE_CXX_COMPILER=${IDE_CXX} -DCMAKE_C_FLAGS_DEBUG="-g3 -gdwarf-2" -DCMAKE_CXX_FLAGS_DEBUG="-g3 -gdwarf-2" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .</preBuildCommand>
+          <preBuildFirst>true</preBuildFirst>
         </preBuild>
       </makefileType>
       <item path="CMakeFiles/3.7.2/CompilerIdC/CMakeCCompilerId.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="2">
       </item>
       <item path="CMakeFiles/3.7.2/CompilerIdCXX/CMakeCXXCompilerId.cpp"
             ex="false"
             tool="1"
-            flavor2="0">
+            flavor2="4">
       </item>
-      <item path="CMakeFiles/feature_tests.c" ex="false" tool="0" flavor2="0">
+      <item path="CMakeFiles/feature_tests.c" ex="false" tool="0" flavor2="2">
       </item>
-      <item path="CMakeFiles/feature_tests.cxx" ex="false" tool="1" flavor2="0">
+      <item path="CMakeFiles/feature_tests.cxx" ex="false" tool="1" flavor2="4">
       </item>
-      <item path="Logger.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Logger.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+          <incDir>
+            <pElem>/usr/local/include</pElem>
+            <pElem>/usr/local/include/opencv</pElem>
+          </incDir>
+        </ccTool>
       </item>
-      <item path="OutputVideo.cpp" ex="false" tool="1" flavor2="0">
+      <item path="OutputVideo.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+          <incDir>
+            <pElem>/usr/local/include</pElem>
+            <pElem>/usr/local/include/opencv</pElem>
+          </incDir>
+        </ccTool>
       </item>
-      <item path="Settings.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Settings.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+          <incDir>
+            <pElem>/usr/local/include</pElem>
+            <pElem>/usr/local/include/opencv</pElem>
+          </incDir>
+        </ccTool>
       </item>
-      <item path="UserInterface.cpp" ex="false" tool="1" flavor2="0">
+      <item path="UserInterface.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+          <incDir>
+            <pElem>/usr/local/include</pElem>
+            <pElem>/usr/local/include/opencv</pElem>
+          </incDir>
+        </ccTool>
       </item>
-      <item path="VictimTracker.cpp" ex="false" tool="1" flavor2="0">
+      <item path="VictimTracker.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+          <incDir>
+            <pElem>/usr/local/include</pElem>
+            <pElem>/usr/local/include/opencv</pElem>
+          </incDir>
+        </ccTool>
       </item>
-      <item path="VictimTracker.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      <item path="main.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+          <incDir>
+            <pElem>/usr/local/include</pElem>
+            <pElem>/usr/local/include/opencv</pElem>
+          </incDir>
+        </ccTool>
       </item>
     </conf>
   </confs>
